@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Kotlin_Counter</string>
+    <string name="kotlin_counter_title">This is a Kotlin based Counter!</string>
+    <string name="kotlin_counter_minus_simbol">-</string>
+    <string name="kotlin_counter_reset_text">Reset</string>
+    <string name="kotlin_counter_sum_simbol">+</string>
+</resources>

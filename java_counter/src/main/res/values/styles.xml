@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="button_style">
+        <item name="android:textColor">#112A46</item>
+        <item name="android:paddingVertical">10dp</item>
+        <item name="marginHorizontal">15dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>
