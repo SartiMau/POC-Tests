@@ -5,16 +5,17 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.idling.CountingIdlingResource
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import kotlinx.coroutines.Dispatchers
+import com.example.kotlin_counter.activity.KotlinCounterActivity
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.job
 import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,11 +23,12 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class CounterKotlinInstrumentedTest {
 
-    private val intent = Intent(ApplicationProvider.getApplicationContext(), KotlinMainActivity::class.java)
+    private val countingIdlingResource = CountingIdlingResource("count")
+    private val intent = Intent(ApplicationProvider.getApplicationContext(), KotlinCounterActivity::class.java)
 
     // In the rule we declare witch activity is going to be tested
     @get:Rule
-    var counterActivity: ActivityScenarioRule<KotlinMainActivity> = ActivityScenarioRule<KotlinMainActivity>(intent)
+    var counterActivity: ActivityScenarioRule<KotlinCounterActivity> = ActivityScenarioRule<KotlinCounterActivity>(intent)
 
     @Test
     fun allFunctionalityTest() {
@@ -45,15 +47,11 @@ class CounterKotlinInstrumentedTest {
         // We use the .perform(click()) to do exactly that, perform a click on the desired element,
         // and use the run blocking in this case to wait for the coroutine
         Espresso.onView(withId(R.id.kotlin_counter_plus_button)).perform(click())
+
         //runBlocking { delay(1100) }
 
-        runBlocking {
-            if (Dispatchers.IO.) {
-                Thread.sleep(1)
-            } else {
-                Espresso.onView(withId(R.id.kotlin_counter_text)).check(matches(withText(ONE_STRING)))
-            }
-        }
+        Espresso.onView(withId(R.id.kotlin_counter_text)).check(matches(withText(ONE_STRING)))
+
 
 
         Espresso.onView(withId(R.id.kotlin_counter_minus_button)).perform(click())

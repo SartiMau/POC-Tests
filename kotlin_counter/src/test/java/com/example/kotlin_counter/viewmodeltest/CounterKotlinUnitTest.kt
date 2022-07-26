@@ -1,8 +1,8 @@
-package com.example.kotlin_counter
+package com.example.kotlin_counter.viewmodeltest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.example.kotlin_counter.data.CountData
+import com.example.kotlin_counter.model.KotlinCounterModel
 import com.example.kotlin_counter.viewmodel.KotlinCounterViewModel
 import com.example.kotlin_counter.viewmodel.KotlinCounterViewModel.KotlinCounterState.INIT
 import com.example.kotlin_counter.viewmodel.KotlinCounterViewModel.KotlinCounterState.UPDATE_VALUE
@@ -38,15 +38,15 @@ class CounterKotlinUnitTest {
     private val mockedObserver = mockk<Observer<KotlinCounterViewModel.KotlinCounterData>>(relaxed = true)
 
     // This is just here to show how would you mock a class with MockK
-    // private val mockedDataBase: CountData = mockkClass(CountData::class)
+    // private val mockedModel: KotlinCounterModel = mockkClass(KotlinCounterModel::class)
 
-    private val dataBase = CountData(ZERO_INT)
+    private val model = KotlinCounterModel(ZERO_INT)
 
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
         MockKAnnotations.init()
-        viewModel = KotlinCounterViewModel()
+        viewModel = KotlinCounterViewModel(model)
     }
 
     @After
@@ -60,7 +60,7 @@ class CounterKotlinUnitTest {
         val list = arrayListOf<KotlinCounterViewModel.KotlinCounterData>()
 
         viewModel.getLiveData().observeForever(mockedObserver)
-        viewModel.init(dataBase)
+        viewModel.init()
 
         verify { mockedObserver.onChanged(capture(list)) }
 
@@ -70,7 +70,7 @@ class CounterKotlinUnitTest {
 
     @Test
     fun `ViewModel set plus one test`() {
-        viewModel.init(dataBase)
+        viewModel.init()
 
         // We can omit this step, depending if we are expecting more than one value to be posted from the ViewModel
         // in this case we are expecting two posts so we need this for catching them
@@ -96,7 +96,7 @@ class CounterKotlinUnitTest {
 
     @Test
     fun `ViewModel set minus one test`() {
-        viewModel.init(dataBase)
+        viewModel.init()
 
         val list = arrayListOf<KotlinCounterViewModel.KotlinCounterData>()
 
@@ -118,7 +118,7 @@ class CounterKotlinUnitTest {
 
     @Test
     fun `ViewModel reset counter test`() {
-        viewModel.init(dataBase)
+        viewModel.init()
         val list = arrayListOf<KotlinCounterViewModel.KotlinCounterData>()
 
         viewModel.getLiveData().observeForever(mockedObserver)

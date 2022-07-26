@@ -1,31 +1,36 @@
-package com.example.kotlin_counter
+package com.example.kotlin_counter.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.kotlin_counter.data.CountData
-import com.example.kotlin_counter.databinding.KotlinMainActivityBinding
+import androidx.appcompat.app.AppCompatActivity
+import androidx.test.espresso.idling.CountingIdlingResource
+import com.example.kotlin_counter.databinding.KotlinCounterActivityBinding
+import com.example.kotlin_counter.model.KotlinCounterModel
 import com.example.kotlin_counter.util.Constants.ZERO
 import com.example.kotlin_counter.viewmodel.KotlinCounterViewModel
 
-class KotlinMainActivity : AppCompatActivity() {
+interface IdlingResource {
+    fun setIdler(countingIdlingResource: CountingIdlingResource)
+}
 
-    private lateinit var binding: KotlinMainActivityBinding
+class KotlinCounterActivity : AppCompatActivity(), IdlingResource {
+
+    private lateinit var binding: KotlinCounterActivityBinding
     private lateinit var viewModel: KotlinCounterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KotlinMainActivityBinding.inflate(layoutInflater)
+        binding = KotlinCounterActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = KotlinCounterViewModel()
+        viewModel = KotlinCounterViewModel(KotlinCounterModel(ZERO))
         viewModel.getLiveData().observe({ lifecycle }, ::updateUI)
 
-        viewModel.init(CountData(ZERO))
+        viewModel.init()
     }
 
     private fun updateUI(data: KotlinCounterViewModel.KotlinCounterData) {
-        when(data.state) {
+        when (data.state) {
             KotlinCounterViewModel.KotlinCounterState.INIT -> init(data.count)
             KotlinCounterViewModel.KotlinCounterState.UPDATE_VALUE -> binding.kotlinCounterText.text = data.count
         }
@@ -48,5 +53,9 @@ class KotlinMainActivity : AppCompatActivity() {
         binding.kotlinCounterResetButton.setOnClickListener {
             viewModel.setReset()
         }
+    }
+
+    override fun setIdler(countingIdlingResource: CountingIdlingResource) {
+        TODO("Not yet implemented")
     }
 }

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.POCTests">
         <activity
-            android:name=".KotlinMainActivity"
+            android:name=".activity.KotlinCounterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

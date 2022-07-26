@@ -3,8 +3,8 @@ package com.example.poc_tests.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.java_counter.JavaMainActivity
-import com.example.kotlin_counter.KotlinMainActivity
+import com.example.java_counter.activity.JavaCounterActivity
+import com.example.kotlin_counter.activity.KotlinCounterActivity
 import com.example.poc_tests.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListeners() {
         binding.mainScreenJavaButton.setOnClickListener {
-            startActivity(Intent(applicationContext, JavaMainActivity::class.java))
+            startActivity(Intent(applicationContext, JavaCounterActivity::class.java))
         }
         binding.mainScreenKotlinButton.setOnClickListener {
-            startActivity(Intent(applicationContext, KotlinMainActivity::class.java))
+            startActivity(Intent(applicationContext, KotlinCounterActivity::class.java))
         }
     }
 }

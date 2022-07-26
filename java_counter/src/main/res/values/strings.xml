@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Java_Counter</string>
+    <string name="java_counter_title">This is a Java based counter!</string>
+    <string name="java_counter_sum_simbol">+</string>
+    <string name="java_counter_minus_simbol">-</string>
+    <string name="java_counter_reset_text">Reset</string>
 </resources>

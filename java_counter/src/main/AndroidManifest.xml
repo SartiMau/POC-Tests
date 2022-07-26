@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.POCTests">
         <activity
-            android:name=".JavaMainActivity"
+            android:name=".activity.JavaCounterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
