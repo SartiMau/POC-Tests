@@ -2,10 +2,10 @@ package com.example.kotlin_counter.viewmodeltest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.example.kotlin_counter.model.KotlinCounterModel
-import com.example.kotlin_counter.viewmodel.KotlinCounterViewModel
-import com.example.kotlin_counter.viewmodel.KotlinCounterViewModel.KotlinCounterState.INIT
-import com.example.kotlin_counter.viewmodel.KotlinCounterViewModel.KotlinCounterState.UPDATE_VALUE
+import com.example.kotlin_counter.mvvm.model.KotlinCounterModel
+import com.example.kotlin_counter.mvvm.viewmodel.KotlinCounterViewModel
+import com.example.kotlin_counter.mvvm.viewmodel.KotlinCounterViewModel.KotlinCounterState.INIT
+import com.example.kotlin_counter.mvvm.viewmodel.KotlinCounterViewModel.KotlinCounterState.UPDATE_VALUE
 import io.mockk.MockKAnnotations
 import io.mockk.mockk
 import io.mockk.unmockkAll

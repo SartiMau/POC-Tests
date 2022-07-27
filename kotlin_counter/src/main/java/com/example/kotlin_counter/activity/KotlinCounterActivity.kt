@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.idling.CountingIdlingResource
 import com.example.kotlin_counter.databinding.KotlinCounterActivityBinding
-import com.example.kotlin_counter.model.KotlinCounterModel
+import com.example.kotlin_counter.mvvm.model.KotlinCounterModel
 import com.example.kotlin_counter.util.Constants.ZERO
-import com.example.kotlin_counter.viewmodel.KotlinCounterViewModel
+import com.example.kotlin_counter.mvvm.viewmodel.KotlinCounterViewModel
 
 interface IdlingResource {
     fun setIdler(countingIdlingResource: CountingIdlingResource)
@@ -56,6 +56,6 @@ class KotlinCounterActivity : AppCompatActivity(), IdlingResource {
     }
 
     override fun setIdler(countingIdlingResource: CountingIdlingResource) {
-        TODO("Not yet implemented")
+
     }
 }

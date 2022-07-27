@@ -23,7 +23,8 @@ public class CounterJavaInstrumentedTest {
 
     // In the rule we declare witch activity is going to be tested
     @Rule
-    public ActivityScenarioRule<JavaCounterActivity> counterActivity = new ActivityScenarioRule<>(JavaCounterActivity.class);
+    public ActivityScenarioRule<JavaCounterActivity> counterActivity =
+            new ActivityScenarioRule<>(JavaCounterActivity.class);
 
     @Test
     public void allFunctionalityTest() {
@@ -31,9 +32,7 @@ public class CounterJavaInstrumentedTest {
 
         // Fist we check that the view is being displayed, and then we check if the content is what we expected it to be
         Espresso.onView(withId(R.id.java_counter_title)).check(matches(isDisplayed()));
-        Espresso.onView(withId(R.id.java_counter_title)).check(
-                matches(withText(applicationContext.getString(R.string.java_counter_title)))
-        );
+        Espresso.onView(withId(R.id.java_counter_title)).check(matches(withText(applicationContext.getString(R.string.java_counter_title))));
 
         // Here we do the same, but with the number that's being displayed
         Espresso.onView(withId(R.id.java_counter_text)).check(matches(isDisplayed()));
@@ -42,17 +41,13 @@ public class CounterJavaInstrumentedTest {
         // We use the .perform(click()) to do exactly that, perform a click on the desired element,
         // and use the run blocking in this case to wait for the coroutine
         Espresso.onView(withId(R.id.java_counter_plus_button)).perform(click());
-
         Espresso.onView(withId(R.id.java_counter_text)).check(matches(withText(ONE_STRING)));
 
         Espresso.onView(withId(R.id.java_counter_minus_button)).perform(click());
-
         Espresso.onView(withId(R.id.java_counter_text)).check(matches(withText(ZERO_STRING)));
 
         Espresso.onView(withId(R.id.java_counter_plus_button)).perform(click());
-
         Espresso.onView(withId(R.id.java_counter_reset_button)).perform(click());
-
         Espresso.onView(withId(R.id.java_counter_text)).check(matches(withText(ZERO_STRING)));
     }
 }

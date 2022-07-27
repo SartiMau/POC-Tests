@@ -1,19 +1,17 @@
 package com.example.java_counter.activity;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-
 import com.example.java_counter.databinding.JavaActivityCounterBinding;
-import com.example.java_counter.model.JavaCounterModel;
-import com.example.java_counter.viewmodel.JavaCounterViewModel;
+import com.example.java_counter.mvp.model.CounterModel;
+import com.example.java_counter.mvp.presenter.CounterPresenter;
+import com.example.java_counter.mvp.view.CounterView;
 
 public class JavaCounterActivity extends AppCompatActivity {
 
     private JavaActivityCounterBinding binding;
-    private JavaCounterViewModel viewModel;
-    private final int ZERO = 0;
+    private CounterPresenter presenter;
+    private static final int ZERO = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,34 +20,17 @@ public class JavaCounterActivity extends AppCompatActivity {
         binding = JavaActivityCounterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel = new JavaCounterViewModel(new JavaCounterModel(ZERO));
-        viewModel.getLiveData().observe(this, updateUI);
+        presenter = new CounterPresenter(new CounterView(this, binding), new CounterModel(ZERO));
+        presenter.init();
 
-        viewModel.init();
-    }
-
-    final Observer<JavaCounterViewModel.JavaCounterData> updateUI =
-            data -> {
-                switch (data.getState()) {
-                    case INIT: {
-                        init(data.getCount());
-                    }
-                    case UPDATE_VALUE: {
-                        binding.javaCounterText.setText(String.valueOf(data.getCount()));
-                    }
-                }
-            };
-
-    private void init(int count) {
-        binding.javaCounterText.setText(String.valueOf(count));
         setListeners();
     }
 
     private void setListeners() {
-        binding.javaCounterPlusButton.setOnClickListener(view -> viewModel.setPlusOne());
+        binding.javaCounterPlusButton.setOnClickListener(view -> presenter.setPlusOne());
 
-        binding.javaCounterMinusButton.setOnClickListener(view -> viewModel.setMinusOne());
+        binding.javaCounterMinusButton.setOnClickListener(view -> presenter.setMinusOne());
 
-        binding.javaCounterResetButton.setOnClickListener(view -> viewModel.resetCount());
+        binding.javaCounterResetButton.setOnClickListener(view -> presenter.resetCount());
     }
 }

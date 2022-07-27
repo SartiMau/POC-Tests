@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">POC-Tests</string>
+    <string name="java_button_text">Java</string>
+    <string name="kotlin_button_text">Kotlin</string>
 </resources>

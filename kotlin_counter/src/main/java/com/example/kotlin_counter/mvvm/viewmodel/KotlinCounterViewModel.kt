@@ -1,10 +1,9 @@
-package com.example.kotlin_counter.viewmodel
+package com.example.kotlin_counter.mvvm.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.test.espresso.idling.CountingIdlingResource
-import com.example.kotlin_counter.model.KotlinCounterModel
+import com.example.kotlin_counter.mvvm.model.KotlinCounterModel
 import com.example.kotlin_counter.util.Constants.ZERO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -48,11 +48,7 @@ class CounterKotlinInstrumentedTest {
         // and use the run blocking in this case to wait for the coroutine
         Espresso.onView(withId(R.id.kotlin_counter_plus_button)).perform(click())
 
-        //runBlocking { delay(1100) }
-
         Espresso.onView(withId(R.id.kotlin_counter_text)).check(matches(withText(ONE_STRING)))
-
-
 
         Espresso.onView(withId(R.id.kotlin_counter_minus_button)).perform(click())
         runBlocking { delay(1100) }
