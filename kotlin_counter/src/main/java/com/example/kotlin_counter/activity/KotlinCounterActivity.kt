@@ -56,6 +56,6 @@ class KotlinCounterActivity : AppCompatActivity(), IdlingResource {
     }
 
     override fun setIdler(countingIdlingResource: CountingIdlingResource) {
-
+        TODO("Work in progress...")
     }
 }

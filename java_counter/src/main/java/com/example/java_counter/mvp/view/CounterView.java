@@ -5,9 +5,9 @@ import com.example.java_counter.databinding.JavaActivityCounterBinding;
 import com.example.java_counter.mvp.contract.CounterContract;
 import com.example.java_counter.mvp.view.base.ActivityView;
 
-public class CounterView extends ActivityView implements CounterContract.CounterViewContract {
+public class CounterView extends ActivityView implements CounterContract.View {
 
-    private JavaActivityCounterBinding binding;
+    private final JavaActivityCounterBinding binding;
 
     public CounterView(Activity activity, JavaActivityCounterBinding binding) {
         super(activity);
@@ -15,7 +15,7 @@ public class CounterView extends ActivityView implements CounterContract.Counter
     }
 
     @Override
-    public void updateValue(int count) {
-        binding.javaCounterText.setText(String.valueOf(count));
+    public void updateValue(String count) {
+        binding.javaCounterText.setText(count);
     }
 }

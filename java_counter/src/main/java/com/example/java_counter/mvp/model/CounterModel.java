@@ -2,7 +2,7 @@ package com.example.java_counter.mvp.model;
 
 import com.example.java_counter.mvp.contract.CounterContract;
 
-public class CounterModel implements CounterContract.CounterModelContract {
+public class CounterModel implements CounterContract.Model {
     private int count;
 
     public CounterModel(int count) {

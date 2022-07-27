@@ -1,27 +1,25 @@
 package com.example.java_counter.mvp.presenter;
 
+import static com.example.java_counter.util.ConstantUtils.ZERO;
 import com.example.java_counter.mvp.contract.CounterContract;
-import com.example.java_counter.mvp.model.CounterModel;
-import com.example.java_counter.mvp.view.CounterView;
 
-public class CounterPresenter implements CounterContract.CounterPresenterContract {
+public class CounterPresenter implements CounterContract.Presenter {
 
-    private final CounterView view;
-    private final CounterModel model;
-    private static final int ZERO = 0;
+    private final CounterContract.View view;
+    private final CounterContract.Model model;
 
-    public CounterPresenter(CounterView view, CounterModel model) {
+    public CounterPresenter(CounterContract.View view, CounterContract.Model model) {
         this.view = view;
         this.model = model;
     }
 
     private void updateValue() {
-        view.updateValue(model.getCount());
+        view.updateValue(String.valueOf(model.getCount()));
     }
 
     @Override
     public void init() {
-        view.updateValue(model.getCount());
+        updateValue();
     }
 
     @Override

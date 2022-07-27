@@ -2,24 +2,19 @@ package com.example.java_counter.mvp.contract;
 
 public interface CounterContract {
 
-    interface CounterPresenterContract {
-        void setPlusOne();
-
-        void setMinusOne();
-
-        void resetCount();
-
-        void init();
-
-    }
-
-    interface CounterModelContract {
+    interface Model {
         void setCount(int count);
-
         int getCount();
     }
 
-    interface CounterViewContract {
-        void updateValue(int count);
+    interface View {
+        void updateValue(String count);
+    }
+
+    interface Presenter {
+        void setPlusOne();
+        void setMinusOne();
+        void resetCount();
+        void init();
     }
 }
