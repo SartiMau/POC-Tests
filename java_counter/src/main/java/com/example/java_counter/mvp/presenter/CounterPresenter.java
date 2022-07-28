@@ -22,6 +22,12 @@ public class CounterPresenter implements CounterContract.Presenter {
         updateValue();
     }
 
+    //This method was made for testing purposes.
+    @Override
+    public String getCountShowed() {
+        return view.getCountShowed();
+    }
+
     @Override
     public void setPlusOne() {
         int count = model.getCount();

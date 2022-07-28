@@ -1,8 +1,10 @@
 package com.example.java_counter.presentertest;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import com.example.java_counter.mvp.contract.CounterContract;
 import com.example.java_counter.mvp.model.CounterModel;
@@ -21,6 +23,7 @@ public class CounterJavaUnitTest {
     public InstantTaskExecutorRule executorRule = new InstantTaskExecutorRule();
 
     private static final int ZERO = 0;
+    private static final int ONE = 1;
     private static final String ZERO_STRING = "0";
     private static final String ONE_STRING = "1";
     private static final String TWO_STRING = "2";
@@ -34,38 +37,50 @@ public class CounterJavaUnitTest {
     }
 
     @Test
-    public void viewModelInitTest() {
-        presenter.init();
-
-        verify(view, times(1)).updateValue(ZERO_STRING);
-    }
-
-    @Test
-    public void viewModelIncreaseTest() {
+    public void mockedViewReturnTest() {
         presenter.init();
         presenter.setPlusOne();
 
-        verify(view, times(1)).updateValue(ZERO_STRING);
-        verify(view, times(1)).updateValue(ONE_STRING);
+        verify(view, times(ONE)).updateValue(ONE_STRING);
+
+        when(view.getCountShowed()).thenReturn(ONE_STRING);
+
+        assertEquals(ONE_STRING, presenter.getCountShowed());
     }
 
     @Test
-    public void viewModelDecreaseTest() {
+    public void presenterInitTest() {
+        presenter.init();
+
+        verify(view, times(ONE)).updateValue(ZERO_STRING);
+    }
+
+    @Test
+    public void increaseCountTest() {
+        presenter.init();
+        presenter.setPlusOne();
+
+        verify(view, times(ONE)).updateValue(ZERO_STRING);
+        verify(view, times(ONE)).updateValue(ONE_STRING);
+    }
+
+    @Test
+    public void decreaseCountTest() {
         presenter.setPlusOne();
         presenter.setMinusOne();
 
-        verify(view, times(1)).updateValue(ONE_STRING);
-        verify(view, times(1)).updateValue(ZERO_STRING);
+        verify(view, times(ONE)).updateValue(ONE_STRING);
+        verify(view, times(ONE)).updateValue(ZERO_STRING);
     }
 
     @Test
-    public void viewModelResetCountTest() {
+    public void resetCountTest() {
         presenter.setPlusOne();
         presenter.setPlusOne();
         presenter.resetCount();
 
-        verify(view, times(1)).updateValue(ONE_STRING);
-        verify(view, times(1)).updateValue(TWO_STRING);
-        verify(view, times(1)).updateValue(ZERO_STRING);
+        verify(view, times(ONE)).updateValue(ONE_STRING);
+        verify(view, times(ONE)).updateValue(TWO_STRING);
+        verify(view, times(ONE)).updateValue(ZERO_STRING);
     }
 }

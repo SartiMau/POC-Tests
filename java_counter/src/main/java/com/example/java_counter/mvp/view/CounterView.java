@@ -18,4 +18,10 @@ public class CounterView extends ActivityView implements CounterContract.View {
     public void updateValue(String count) {
         binding.javaCounterText.setText(count);
     }
+
+    //This method was made for testing purposes.
+    @Override
+    public String getCountShowed() {
+        return binding.javaCounterText.getText().toString();
+    }
 }

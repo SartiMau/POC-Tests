@@ -7,7 +7,9 @@ import com.example.kotlin_counter.mvvm.viewmodel.KotlinCounterViewModel
 import com.example.kotlin_counter.mvvm.viewmodel.KotlinCounterViewModel.KotlinCounterState.INIT
 import com.example.kotlin_counter.mvvm.viewmodel.KotlinCounterViewModel.KotlinCounterState.UPDATE_VALUE
 import io.mockk.MockKAnnotations
+import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkClass
 import io.mockk.unmockkAll
 import io.mockk.verify
 import junit.framework.Assert.assertEquals
@@ -38,7 +40,7 @@ class CounterKotlinUnitTest {
     private val mockedObserver = mockk<Observer<KotlinCounterViewModel.KotlinCounterData>>(relaxed = true)
 
     // This is just here to show how would you mock a class with MockK
-    // private val mockedModel: KotlinCounterModel = mockkClass(KotlinCounterModel::class)
+    private val mockedModel: KotlinCounterModel = mockkClass(KotlinCounterModel::class)
 
     private val model = KotlinCounterModel(ZERO_INT)
 
@@ -53,6 +55,23 @@ class CounterKotlinUnitTest {
     fun afterTests() {
         Dispatchers.resetMain()
         unmockkAll()
+    }
+
+    //This test is only for demonstration purposes.
+    @Test
+    fun `Mocked model test`() {
+        val list = arrayListOf<KotlinCounterViewModel.KotlinCounterData>()
+        val secondaryViewModel = KotlinCounterViewModel(mockedModel)
+
+        every { mockedModel.count } returns FIVE_INT
+
+        secondaryViewModel.getLiveData().observeForever(mockedObserver)
+        secondaryViewModel.init()
+
+        verify { mockedObserver.onChanged(capture(list)) }
+
+        assertEquals(INIT, list[0].state)
+        assertEquals(FIVE_STRING, list[0].count)
     }
 
     @Test
@@ -141,6 +160,8 @@ class CounterKotlinUnitTest {
     companion object {
         const val ZERO_STRING = "0"
         const val ONE_STRING = "1"
+        const val FIVE_STRING = "5"
         const val ZERO_INT = 0
+        const val FIVE_INT = 5
     }
 }

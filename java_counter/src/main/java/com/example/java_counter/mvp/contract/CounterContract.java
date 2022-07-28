@@ -9,6 +9,7 @@ public interface CounterContract {
 
     interface View {
         void updateValue(String count);
+        String getCountShowed();
     }
 
     interface Presenter {
@@ -16,5 +17,6 @@ public interface CounterContract {
         void setMinusOne();
         void resetCount();
         void init();
+        String getCountShowed();
     }
 }
